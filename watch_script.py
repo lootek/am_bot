@@ -31,12 +31,13 @@ except:
 
 try:
     # Create the tgtg client with my credentials
-    tgtg_client = TgtgClient(access_token=config['tgtg']['access_token'], refresh_token=config['tgtg']['refresh_token'], user_id=config['tgtg']['user_id'])
+    tgtg_client = TgtgClient(access_token=config['tgtg']['access_token'], refresh_token=config['tgtg']['refresh_token'], user_id=config['tgtg']['user_id'], cookie=config['tgtg']['cookie'])
 except KeyError:
     # print(f"Failed to obtain TGTG credentials.\nRun \"python3 {sys.argv[0]} <your_email>\" to generate TGTG credentials.")
     # exit(1)
     try:
-        email = input("Type your TooGoodToGo email address: ")
+        #email = input("Type your TooGoodToGo email address: ")
+        email = config['tgtg']['email']
         client = TgtgClient(email=email)
         tgtg_creds = client.get_credentials()
         print(tgtg_creds)
@@ -369,7 +370,7 @@ def refresh():
         telegram_bot_sendtext("Error occured: \n```" + str(traceback.format_exc()) + "```")
 
 # Use schedule to set up a recurrent checking
-schedule.every(1).minutes.do(refresh)
+schedule.every(9).minutes.do(refresh)
 schedule.every(24).hours.do(still_alive)
 
 # Description of the service, that gets send once
