@@ -172,7 +172,7 @@ def toogoodtogo():
 
     # Get all favorite items
     api_response = tgtg_client.get_items(
-        favorites_only=False,
+        favorites_only=True,
         latitude=config['location']['lat'],
         longitude=config['location']['long'],
         radius=config['location']['range'],
@@ -272,7 +272,7 @@ def foodsi():
                 "lng": config['location']['long'],
                 "range": config['location']['range']*1000
             },
-            "hide_unavailable": False,
+            "hide_unavailable": True,
             "food_type": [],
             "collection_time": {
                 "from": "00:00:00",
@@ -379,4 +379,4 @@ refresh()
 while True:
     # run_pending
     schedule.run_pending()
-    time.sleep(1)
+    time.sleep(10)
