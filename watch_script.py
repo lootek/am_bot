@@ -172,7 +172,7 @@ def toogoodtogo():
 
     # Get all favorite items
     api_response = tgtg_client.get_items(
-        favorites_only=True,
+        favorites_only=config['tgtg']['favorites'],
         latitude=config['location']['lat'],
         longitude=config['location']['long'],
         radius=config['location']['range'],
